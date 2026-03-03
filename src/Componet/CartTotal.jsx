@@ -1,0 +1,35 @@
+import React, { useContext } from 'react'
+import { ShopContext } from '../context/ShopContext'
+import Title from './Title'
+
+const CartTotal = () => {
+ const{currency,deliveryfee,getCartAmount}=useContext(ShopContext)
+    return (
+    <div w-full>
+        <div className='text-2xl'>
+            <Title text1={'CART '} text2={'TOTALS'}/>
+
+        </div>
+        <div className='flex flex-col gap-2 mt-2 text-sm'>
+<div className='flex justfy-between'>
+<p>Subtotal</p>
+<p>{currency}{getCartAmount()}.00</p>
+</div>
+<hr/>
+<div className='flex justfy-between'>
+    <p>Shipping Fee</p>
+    <p>{currency}{deliveryfee}</p>
+
+</div>
+<hr/>
+<div className='flex justfy-between'>
+<b>Total</b>
+<b>{currency}{getCartAmount()=== 0 ? 0 : getCartAmount()+ deliveryfee}</b>
+</div>
+
+        </div>
+    </div>
+  )
+}
+
+export default CartTotal
