@@ -6,7 +6,7 @@ import { assets } from "../Assets/frontend_assets/assets";
 import CartTotal from "../Componet/CartTotal";
 
 const Cart = () => {
-  const { cartItems, currency, products, updateQuantity } =
+  const { cartItems, currency, products, updateQuantity ,navigate} =
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
   useEffect(() => {
@@ -65,7 +65,15 @@ const Cart = () => {
                 type="number"
                 min={1}
                 defaultValue={item.quantity}
-                onChange={(e)=>e.target.value === '' || e.target.value==='0'?null:updateQuantity(item._id,item.size,Number(e.target.value))}
+                onChange={(e) =>
+                  e.target.value === "" || e.target.value === "0"
+                    ? null
+                    : updateQuantity(
+                        item._id,
+                        item.size,
+                        Number(e.target.value),
+                      )
+                }
               />
               <img
                 onClick={() => updateQuantity(item._id, item.size, 0)}
@@ -78,9 +86,12 @@ const Cart = () => {
         })}
       </div>
       <div className="flex justify-end my-20">
-<div className="w-full sm:w-[450px]" >
-<CartTotal/>
-</div>
+        <div className="w-full sm:w-[450px]">
+          <CartTotal />
+          <div className="w-full text-end">
+            <button onClick={()=>navigate('/placeorder')} className="bg-black text-white text-sm my-8 px-8 py-3 ">PROCEED TO CHECKOUT</button>
+          </div>
+        </div>
       </div>
     </div>
   );
